@@ -121,7 +121,7 @@ def player_animation():
 
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
-pygame.display.set_caption("runner")
+pygame.display.set_caption("Lina the Runner")
 clock = pygame.time.Clock()
 test_font = pygame.font.Font('font/04B_30__.TTF', 50)
 game_active = False
@@ -139,9 +139,6 @@ obstacle_group = pygame.sprite.Group()
 
 sky_surface = pygame.image.load('graphics/sky.001.png').convert()
 land_surface = pygame.image.load('graphics/land.png').convert_alpha()
-
-# score_surf = test_font.render('My game', False, '#FFFAF8')
-# score_rect = score_surf.get_rect(center = (400, 50))
 
 # monster
 monster_frame_1 = pygame.image.load('graphics/monster/monster1.png').convert_alpha()
@@ -213,10 +210,6 @@ while True:
         if game_active:
             if event.type == obstacle_timer:
                 obstacle_group.add(Obstacle(choice(['fly', 'monster', 'monster', 'monster'])))
-                # if randint(0, 2):
-                #     obstacle_rect_list.append(monster_surf.get_rect(bottomright = (randint(900,1100), 370)))
-                # else:
-                #     obstacle_rect_list.append(fly_surf.get_rect(bottomright = (randint(900,1100), 240)))
 
             if event.type == monster_animation_timer:
                 if monster_frame_index == 0 : monster_frame_index = 1
@@ -228,36 +221,19 @@ while True:
                 else: fly_frame_index = 0
                 fly_surf = fly_frames[fly_frame_index]
 
-
-
     if game_active:
         screen.blit(sky_surface, (0, 0))
         screen.blit(land_surface, (0, 0))
-        # screen.blit(score_surf, score_rect)
         score = display_score()
 
-        # monster_rect.x -= 4
-        # if monster_rect.right <= 0 : monster_rect.left = 800
-        # screen.blit(monster_surf, monster_rect)
-
-        # player
-        # player_gravity += 0.9
-        # player_rect.y += player_gravity
-        # if player_rect.bottom >= 370: player_rect.bottom = 370
-        # player_animation()
-        # screen.blit(player_surf, player_rect)
         player.draw(screen)
         player.update()
 
         obstacle_group.draw(screen)
         obstacle_group.update()
 
-        # Obstacle movement
-        # obstacle_rect_list = obstacle_movement(obstacle_rect_list)
-
         # collision
         game_active = collision_sprite()
-        # game_active = collisions(player_rect, obstacle_rect_list)
 
     else:
         screen.fill('#AAC3E2')
